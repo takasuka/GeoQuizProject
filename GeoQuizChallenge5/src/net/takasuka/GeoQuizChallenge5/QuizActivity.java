@@ -12,8 +12,8 @@ import android.widget.Toast;
 public class QuizActivity extends Activity {
 
     private static final String TAG = "QuizActivity";
-
     private static final String KEY_INDEX = "index";
+    private static final String EXTRA_IS_CHEATER = "net.takasuka.GeoQuiz.extra_is_cheater";
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -43,10 +43,12 @@ public class QuizActivity extends Activity {
 
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+            mIsCheater = savedInstanceState.getBoolean(EXTRA_IS_CHEATER, false);
+        } else {
+            mIsCheater = false;
         }
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
-        mIsCheater = false;
         updateQuestion();
 
         mTrueButton = (Button) findViewById(R.id.true_button);
@@ -121,6 +123,7 @@ public class QuizActivity extends Activity {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+        savedInstanceState.putBoolean(EXTRA_IS_CHEATER, mIsCheater);
     }
 
     @Override
