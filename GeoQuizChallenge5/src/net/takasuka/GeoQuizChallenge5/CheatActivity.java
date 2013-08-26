@@ -13,15 +13,20 @@ public class CheatActivity extends Activity {
     public static final String EXTRA_ANSWER_SHOWN = "net.takasuka.GeoQuiz.answer_shown";
 
     private boolean mAnswerIsTrue;
+    private boolean mAnswerIsShown;
     private TextView mAnswerTextView;
     private Button mShowAnswer;
 
-
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
 
-        setAnswerShownResult(false);
+        mAnswerIsShown = false;
+        if (savedInstanceState != null) {
+            mAnswerIsShown = savedInstanceState.getBoolean(EXTRA_ANSWER_SHOWN, false);
+        }
+        setAnswerShownResult(mAnswerIsShown);
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
@@ -41,7 +46,14 @@ public class CheatActivity extends Activity {
         });
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle saveInstanceState) {
+        super.onSaveInstanceState(saveInstanceState);
+        saveInstanceState.putBoolean(EXTRA_ANSWER_SHOWN, mAnswerIsShown);
+    }
+
     private void setAnswerShownResult(boolean isAnswerShown) {
+        mAnswerIsShown = isAnswerShown;
         Intent data = new Intent();
         data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
         setResult(RESULT_OK, data);
