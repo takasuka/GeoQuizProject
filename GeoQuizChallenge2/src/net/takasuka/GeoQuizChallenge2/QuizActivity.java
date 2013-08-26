@@ -1,4 +1,4 @@
-package net.takasuka.GeoQuiz;
+package net.takasuka.GeoQuizChallenge2;
 
 import android.app.Activity;
 import android.os.Bundle;
