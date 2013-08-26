@@ -1,6 +1,8 @@
 package net.takasuka.GeoQuizChallenge5;
 
-public class TrueFalse {
+import java.io.Serializable;
+
+public class TrueFalse implements Serializable{
 
     private int mQuestion;
     private boolean mTrueQuestion;

@@ -30,7 +30,6 @@ public class QuizActivity extends Activity {
     };
 
     private int mCurrentIndex = 0;
-    private boolean mIsCheater;
 
     /**
      * Called when the activity is first created.
@@ -43,9 +42,7 @@ public class QuizActivity extends Activity {
 
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
-            mIsCheater = savedInstanceState.getBoolean(EXTRA_IS_CHEATER, false);
-        } else {
-            mIsCheater = false;
+            mQuestionBank = (TrueFalse[]) savedInstanceState.getSerializable(EXTRA_IS_CHEATER);
         }
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
@@ -82,7 +79,6 @@ public class QuizActivity extends Activity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mIsCheater = false;
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
             }
@@ -124,7 +120,7 @@ public class QuizActivity extends Activity {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
-        savedInstanceState.putBoolean(EXTRA_IS_CHEATER, mIsCheater);
+        savedInstanceState.putSerializable(EXTRA_IS_CHEATER, mQuestionBank);
     }
 
     @Override
@@ -132,7 +128,8 @@ public class QuizActivity extends Activity {
         if (data == null) {
             return;
         }
-        mIsCheater = data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+        boolean isCheater = data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+        mQuestionBank[mCurrentIndex].setIsCheat(isCheater);
     }
 
     private void updateQuestion() {
@@ -142,9 +139,10 @@ public class QuizActivity extends Activity {
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
-        int messageResId = 0;
+        boolean isCheater = mQuestionBank[mCurrentIndex].isCheat();
+        int messageResId;
 
-        if (mIsCheater) {
+        if (isCheater) {
             messageResId = R.string.judgement_toast;
         } else {
             if (userPressedTrue == answerIsTrue) {
