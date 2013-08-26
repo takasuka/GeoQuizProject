@@ -1,4 +1,4 @@
-package net.takasuka.GeoQuiz;
+package net.takasuka.GeoQuizChallenge5;
 
 import android.app.Activity;
 import android.content.Intent;
