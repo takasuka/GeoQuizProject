@@ -1,4 +1,4 @@
-package net.takasuka.GeoQuiz;
+package net.takasuka.GeoQuizChallenge7;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 public class CheatActivity extends Activity {
 
-    public static final String EXTRA_ANSWER_IS_TRUE = "net.takasuka.GeoQuiz.answer_is_true";
-    public static final String EXTRA_ANSWER_SHOWN = "net.takasuka.GeoQuiz.answer_shown";
+    public static final String EXTRA_ANSWER_IS_TRUE = "net.takasuka.GeoQuizChallenge7.answer_is_true";
+    public static final String EXTRA_ANSWER_SHOWN = "net.takasuka.GeoQuizChallenge7.answer_shown";
 
     private boolean mAnswerIsTrue;
     private TextView mAnswerTextView;

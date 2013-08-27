@@ -1,4 +1,4 @@
-package net.takasuka.GeoQuiz;
+package net.takasuka.GeoQuizChallenge7;
 
 import android.app.ActionBar;
 import android.app.Activity;

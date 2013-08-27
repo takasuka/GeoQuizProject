@@ -1,4 +1,4 @@
-package net.takasuka.GeoQuiz;
+package net.takasuka.GeoQuizChallenge7;
 
 public class TrueFalse {
 
