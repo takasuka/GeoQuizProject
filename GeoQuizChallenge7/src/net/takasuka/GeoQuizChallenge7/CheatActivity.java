@@ -2,6 +2,7 @@ package net.takasuka.GeoQuizChallenge7;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,10 @@ public class CheatActivity extends Activity {
                 setAnswerShownResult(true);
             }
         });
+
+        String apiLevel = Integer.toString(Build.VERSION.SDK_INT);
+        TextView apiLevelTextView = (TextView) findViewById(R.id.apiLevel);
+        apiLevelTextView.setText("API level " + apiLevel);
     }
 
     private void setAnswerShownResult(boolean isAnswerShown) {
